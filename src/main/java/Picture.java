@@ -104,21 +104,45 @@ public class Picture extends SimplePicture
     // Using the zeroBlue method as a starting point, write the method keepOnlyBlue that
     // will keep **only** the blue values, that is, it will set the red and green values to zero
     public void keepOnlyBlue() {
-        // YOUR CODE HERE
+        Pixel[][] pixels = this.getPixels2D();
+        for (int row = 0; row < pixels.length; row++){
+            for (int col = 0; col < pixels[0].length; col++){
+                Pixel pix = pixels[row][col];
+                pix.setGreen(0);
+                pix.setRed(0);
+            }
+        }
     }
 
     // Write the negate method to negate all the pixels in a picture. To negate a picture, set the red
     // value to 255 minus the current red value, the green value to 255 minus the current green value
     // and the blue value to 255 minus the current blue value.
     public void negate() {
-        // YOUR CODE HERE
+        Pixel[][] pixels = this.getPixels2D();
+        for (int row = 0; row < pixels.length; row++){
+            for (int col = 0; col < pixels[0].length; col++){
+                Pixel pix = pixels[row][col];
+                pix.setGreen(255-pix.getGreen());
+                pix.setRed(255-pix.getRed());
+                pix.setBlue(255-pix.getBlue());
+            }
+        }
     }
 
     // Write the grayscale method to turn the picture into shades of gray. Set the red, green, and
     // blue values to the average of the current red, green, and blue values (add all three values and
     // divide by 3).
     public void grayscale() {
-        // YOUR CODE HERE
+        Pixel[][] pixels = this.getPixels2D();
+        for (int row = 0; row < pixels.length; row++){
+            for (int col = 0; col < pixels[0].length; col++){
+                Pixel pix = pixels[row][col];
+                int avg = (pix.getGreen() + pix.getBlue() + pix.getRed()) / 3;
+                pix.setGreen(avg);
+                pix.setRed(avg);
+                pix.setBlue(avg);
+            }
+        }
     }
 
     // Write the mirrorCopy method which mirrors and copies the left side of the image
@@ -126,13 +150,30 @@ public class Picture extends SimplePicture
     // Note: you should set the colors values of the pixel you are changing with the
     // setter methods rather than trying to copy the actual pixel
     public void mirrorCopy() {
-        // YOUR CODE HERE
+        Pixel[][] pixels = this.getPixels2D();
+        for (int row = 0; row < pixels.length; row++){
+            for (int col = 0; col < pixels[0].length/2; col++){
+                Pixel pix = pixels[row][(pixels[0].length - col-1)];
+                Pixel pix2 = pixels[row][col];
+                pix.setGreen(pix2.getGreen());
+                pix.setRed(pix2.getRed());
+                pix.setBlue(pix2.getBlue());
+            }
+        }
     }
 
     // Bonus — Explore the “water.jpg” picture in the images folder. Write a method
     // fixUnderwater() to modify the pixel colors to make the fish easier to see
     public void fixUnderwater() {
-        // YOUR CODE HERE
+        Pixel[][] pixels = this.getPixels2D();
+        for (int row = 0; row < pixels.length; row++){
+            for (int col = 0; col < pixels[0].length; col++){
+                Pixel pix = pixels[row][col];
+                pix.setGreen(pix.getGreen()-100);
+                pix.setBlue(pix.getBlue()-100);
+                pix.setRed(pix.getRed() + 30);
+            }
+        }
     }
 
     // Challenge — Write the mirrorDiagonal method that mirrors just a square part of the picture
@@ -147,12 +188,17 @@ public class Picture extends SimplePicture
      * method
      */
     public static void main(String[] args) {
-        Picture pic = new Picture("beach.jpg");
-//        Picture pic = new Picture("water.jpg");
+//        Picture pic = new Picture("beach.jpg");
+        Picture pic = new Picture("water.jpg");
 
         // The explore method makes a pop-up window of the current picture
 //        pic.explore();
-        pic.zeroBlue();
+//        pic.zeroBlue();
+//        pic.keepOnlyBlue();
+//        pic.negate();
+//        pic.grayscale();
+//        pic.mirrorCopy();
+        pic.fixUnderwater();
         pic.explore();
     }
 
