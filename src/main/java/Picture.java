@@ -198,7 +198,7 @@ public class Picture extends SimplePicture
 //        pic.negate();
 //        pic.grayscale();
 //        pic.mirrorCopy();
-        pic.fixUnderwater();
+//        pic.fixUnderwater();
         pic.explore();
     }
 
